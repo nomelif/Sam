@@ -14,7 +14,7 @@ class InputDevice:
 
     """
 
-    def __init__(self, onSpoken, onInterrupted):
+    def __init__(self, onSpoken, onInterrupted, onNotUnderstood):
 
         """
 
@@ -26,6 +26,7 @@ class InputDevice:
 
         self.onSpoken = onSpoken
         self.onInterrupted = onInterrupted
+        self.onNotUnderstood = onNotUnderstood
 
     def startListening(self):
 
@@ -71,11 +72,11 @@ class SoundInterface():
 
     """ This class should hopefully allow using `InputDevice` and `OutputDevice` in a safe way. """
 
-    def __init__(self, onSpeechGotten, onListenInterrupted, onSpeakInterrupted):
+    def __init__(self, onSpeechGotten, onListenInterrupted, onListenNotUnderstood, onSpeakInterrupted):
 
         """ This init basically creates both the `InputDevice` and `OutputDevice` """
 
-        self.inDevice = InputDevice(onSpeechGotten, onListenInterrupted)
+        self.inDevice = InputDevice(onSpeechGotten, onListenInterrupted, onListenNotUnderstood)
         self.outDevice = OutputDevice(onSpeakInterrupted)
 
     def listenToPhrase(self):
