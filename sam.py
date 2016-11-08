@@ -6,4 +6,4 @@ This is the main launchable file for Sam. It reads input from `InputDevices` and
 
 """
 
-from SoundInterface import InputDevice, OutputDevice
+from SoundInterface import SoundInterface
