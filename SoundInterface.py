@@ -19,7 +19,7 @@ class InputDevice:
         """
 
         * `onSpoken`: method to call when the user has finished uttering something. It is called with a string representation of the input.
-        * `onInterrupted`: method to call when the user interrupts Sam when Sam is talking. The sound is killed before this is called.
+        * `onInterrupted`: method to call when something using the microphone get's killed or Sam starts speaking while still waiting for user input.
         * `onNotUnderstood`: method to call when the speech to text fails to provide a string.
 
         """
@@ -41,4 +41,55 @@ class InputDevice:
 
     def killMicrophone(self):
 
-        """ This method kills the microphone if something was being recorded. It returns `True` if the microphone was running or `False` if it was not. If the microphone was running because of a call to `startListening`, `onInterrupted` is called. If the microphone was running because of a call to `startRecording` it finishes it's job and `startRecording` returns as expected.
+        """ This method kills the microphone if something was being recorded. It returns `True` if the microphone was running or `False` if it was not. If the microphone was running because of a call to `startListening`, `onInterrupted` is called. If the microphone was running because of a call to `startRecording` it finishes it's job and `startRecording` returns as expected."""
+
+class OutputDevice:
+
+""" This class handles sound through the speakers. """
+
+    def __init__(self, onInterrupted):
+
+        """
+
+        * `onInterrupted`: method to call when the user starts speaking over Sam or Sam needs to abruptly stop because of an internal function.
+
+        """
+
+        self.onInterrupted = onInterrupted
+
+    def speak(self, sentence):
+
+        """This function speaks (if not interrupted) a vocal message. It returns `None`."""
+
+        pass
+
+    def _parseText(self, sentence):
+
+        """This function tries to make spoken text more digestible to the TTS engine. This returns the parsed text."""
+
+class SoundInterface():
+
+    """ This class should hopefully allow using `InputDevice` and `OutputDevice` in a safe way. """
+
+    def __init__(self, onSpeechGotten, onListenInterrupted, onSpeakInterrupted):
+
+        """ This init basically creates both the `InputDevice` and `OutputDevice` """
+
+        self.inDevice = InputDevice(onSpeechGotten, onListenInterrupted)
+        self.outDevice = OutputDevice(onSpeakInterrupted)
+
+    def listenToPhrase(self):
+        
+        """ This method gets the input device to start listening to a phrase. It kills the OutputDevice and the InputDevice's previous jobs. """
+
+    def listenToAudio(self):
+
+        """ This method gets the input device to start listening to raw audio. It kills the OutputDevice and the InputDevice's previous jobs. """
+
+    def speak(self, sentence):
+
+        """ This function makes the output device speak a sentence. This kills all the previous jobs. """
+
+    def askQuestion(self, question):
+
+        """ This function asks a question, waits for the answer and returns it. If no intelligible answer is found, returns `None`. """
