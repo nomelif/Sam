@@ -9,6 +9,7 @@ Using a server permits defering most calculation and rendering that would requir
 """
 
 from cherrypy import wsgiserver
+import threading
 
 class SamServer():
 
@@ -18,11 +19,30 @@ class SamServer():
 
         """ This function starts the server, but the server doesn't know how to do anything. """
 
-        pass
+
+        self._methods = {}
+        self.server = wsgiserver.CherryPyWSGIServer(('0.0.0.0', port), self._app)
+
+        threading.Thread(target=self.server.start).start()
+        #self.server.start()
+
+    def _app(self, environ, start_response):
+
+        """ WSGI app: delegate everything to submethods """
+
+        for key in self._methods.keys():
+            if environ["PATH_INFO"].split("/")[1] == key:
+                return self._methods[key](environ, start_response)
+        status = "404 Not Found"
+        response_headers = [('Content-type', 'text/plain')]
+        start_response(status, response_headers)
+        return [b"Page not found"]
 
     def addPage(self, path, generatePage):
 
         """ This makes it so that requests for anything under `path` is handled by `generatePage`, which gets all the context data of the app function. """
+
+        self._methods[path] = generatePage
 
     def removePage(self, path):
 
