@@ -12,7 +12,7 @@ from cherrypy import wsgiserver
 
 class SamServer():
 
-""" The Sam server works as a HTML5 relay between sam and a remote computer. """
+    """ The Sam server works as a HTML5 relay between sam and a remote computer. """
 
     def __init__(self, port):
 
@@ -22,11 +22,11 @@ class SamServer():
 
     def addPage(self, path, generatePage):
 
-    """ This makes it so that requests for anything under `path` is handled by `generatePage`, which gets all the context data of the app function. """
+        """ This makes it so that requests for anything under `path` is handled by `generatePage`, which gets all the context data of the app function. """
 
     def removePage(self, path):
 
-    """ Remove the page matching the pathspec `path`. """
+        """ Remove the page matching the pathspec `path`. """
 
     def kill(self):
 
