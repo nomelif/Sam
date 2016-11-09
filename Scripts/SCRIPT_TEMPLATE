@@ -1,0 +1,15 @@
+#!/usr/bin/python3
+
+""" Description of the unit """
+
+def decideActivation(inputData):
+
+    """ Decide whether to activate the unit """
+
+    pass
+
+def run(io, device, server):
+
+    """ Run the operations related to the command """
+
+    pass
