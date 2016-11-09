@@ -81,7 +81,7 @@ class SoundInterface():
 
     def listenToPhrase(self):
         
-        """ This method gets the input device to start listening to a phrase. It kills the OutputDevice and the InputDevice's previous jobs. """
+        """ This method gets the input device to start listening to a phrase. It kills the OutputDevice and the InputDevice's previous jobs. When it is done it returns the phrase."""
 
     def listenToAudio(self):
 
@@ -89,7 +89,7 @@ class SoundInterface():
 
     def speak(self, sentence):
 
-        """ This function makes the output device speak a sentence. This kills all the previous jobs. """
+        """ This function makes the output device speak a sentence. This kills all the previous jobs. This waits until the speech synthethiser is done."""
 
     def askQuestion(self, question):
 
