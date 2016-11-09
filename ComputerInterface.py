@@ -6,9 +6,11 @@ class ComputerInterface():
 
     """ This class provides an interface to a foreign device. """
 
-    def __init__():
+    def __init__(self, ip, deviceClass, OS):
 
-        pass
+        self.ip = ip
+        self.deviceType = deviceClass
+        self.os = OS
 
     SUPPORTED_DESKTOP = 0
 
@@ -39,7 +41,7 @@ class ComputerInterface():
 
         """ This function tells what type of device Sam is connected to. Possible values are `ComputerInterface.SUPPORTED_DESKTOP`, `ComputerInterface.FOREIGN_DESKTOP`, `ComputerInterface.SUPPORTED_PHABLET`, `ComputerInterface.FOREIGN_PHABLET` and `ComputerInterface.UNKNOWN_DEVICE`. """
 
-        pass
+        return self.deviceType
 
     def hasClientInstalled():
 
@@ -89,7 +91,7 @@ class ComputerInterface():
 
         """ This function tells what operating system the connected device is running. It can return `ComputerInterface.WINDOWS`, `ComputerInterface.LINUX`, `ComputerInterface.MACOS`, `ComputerInterface.FOREIGN_UNIX_DESKTOP`, `ComputerInterface.ANDROID`, `ComputerInterface.IOS`, `ComputerInterface.UNKNOWN`. """
 
-        pass
+        return self.os
 
     def passCommand(command):
 
